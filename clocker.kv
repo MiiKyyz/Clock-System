@@ -1,0 +1,433 @@
+
+<MyButton@Button>
+    background_color: (0/255,0/255,0/255,0)
+
+
+    radi: 20
+    canvas.before:
+        Color:
+            rgb: (255/255,255/255,255/255,1)
+
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.radi)
+            width: 2
+
+
+
+
+
+<MainLayout>
+
+    MDFloatLayout:
+        size: root.width, root.height
+
+
+
+
+        MDBottomNavigation:
+            panel_color: (6 / 255, 88 / 255, 97 / 255, 1)
+            id: BottomNavigation
+            text_color_active: (27/255,225/255,247/255,1)
+
+
+            MDBottomNavigationItem:
+                name: "StopWatch"
+                text: "Stop Watch"
+                icon: "watch-export"
+                id: StopWatch
+                on_tab_press: root.ThemeTabs(StopWatch.name)
+
+
+
+
+                MDFloatLayout:
+
+                    canvas.before:
+                        Color:
+                            rgba: (255/255, 255/255, 255/255, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                            source: "watch.jpg"
+
+
+
+
+
+                    MDLabel:
+                        id: StopWatchID
+                        text: "00:00"
+                        pos_hint: {"center_x":0.5, "y": 0.65}
+                        size_hint: None, None
+                        size: 200,100
+                        halign: 'center'
+                        markup: True
+
+
+                        font_size: 50
+
+                        markup: True
+                        colorOne: 6
+                        colorTwo: 88
+                        colorThree: 97
+
+                        canvas.before:
+                            Color:
+                                rgb: (StopWatchID.colorOne/255,StopWatchID.colorTwo/255,StopWatchID.colorThree/255,1)
+
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [30,0,30,0]
+
+                    MDIconButton:
+                        icon: "watch"
+
+                        theme_text_color: 'Custom'
+                        text_color: (StopWatchID.colorOne/255,StopWatchID.colorTwo/255,StopWatchID.colorThree/255,1)
+                        user_font_size: "60dp"
+                        pos_hint: {"center_x":0.5, "y": 0.25}
+                        on_press: root.StopWatchRing()
+
+
+
+                    Image:
+                        source: "Watch1.png"
+                        #pos_hint: {"center_x":0.2, "center_y": 0.5}
+                        size_hint: None,None
+                        size: 300,300
+                        flip: 0
+                        id: img
+                        canvas.before:
+
+                            Rotate:
+                                angle: img.flip
+                                origin: self.center
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            MDBottomNavigationItem:
+                name: "Timer"
+                text: "Timer"
+                icon: "timer"
+                id: Timer
+
+                on_tab_press: root.ThemeTabs(Timer.name)
+
+                MDBoxLayout:
+                    orientation: "vertical"
+
+                    canvas.before:
+                        Color:
+                            rgba: (255/255, 255/255, 255/255, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                            source: "timer.jpg"
+
+
+                    MDFloatLayout:
+
+
+
+                        MDLabel:
+                            text: "[font=SNAP____]00:00:00[/font]"
+                            pos_hint: {"center_x":0.5, "center_y": 0.5}
+                            size_hint: None, None
+                            size: 350,80
+                            markup: True
+                            id: LabelTimer
+                            font_size: 50
+                            halign: 'center'
+                            colorOne: 82
+                            colorTwo: 0
+                            colorThree: 153
+                            canvas.before:
+                                Color:
+                                    rgb: (LabelTimer.colorOne/255,LabelTimer.colorTwo/255,LabelTimer.colorThree/255,1)
+
+                                RoundedRectangle:
+                                    size: self.size
+                                    pos: self.pos
+                                    radius: [0,30,0,30]
+
+                    MDFloatLayout:
+                        MDGridLayout:
+                            cols: 3
+                            spacing: 2.5
+
+                            size_hint: None, None
+                            size: 300, 300
+                            pos_hint: {"center_x":0.5, "center_y": 0.58}
+
+                            MyButton:
+                                text: "1"
+                                id: one
+                                on_press: root.TimerCall(one.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "2"
+                                id: two
+                                on_press: root.TimerCall(two.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "3"
+                                id: three
+                                on_press: root.TimerCall(three.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "4"
+                                id: four
+                                on_press: root.TimerCall(four.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "5"
+                                id: five
+                                on_press: root.TimerCall(five.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "6"
+                                id: six
+                                on_press: root.TimerCall(six.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "7"
+                                id: seven
+                                on_press: root.TimerCall(seven.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "8"
+                                id: eight
+                                on_press: root.TimerCall(eight.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "9"
+                                id: nine
+                                on_press: root.TimerCall(nine.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "Start"
+                                id: StartTimerButton
+                                on_press: root.Timer()
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "0"
+                                id: zero
+                                on_press: root.TimerCall(zero.text)
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+                            MyButton:
+                                text: "Delete"
+                                id: DeleteTimerButton
+                                on_press: root.TimerRemove()
+                                canvas.before:
+                                    Color:
+                                        rgb: (82/255, 0/255, 153/255, 1) if self.state == 'normal' else (201/255,141/255,252/255,1)
+
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [20]
+
+                        Image:
+                            source: "Watch.png"
+                            pos_hint: {"center_x":0.1, "center_y": 0.5}
+                            size_hint: None,None
+                            size: 200,200
+                            flip1: 0
+                            id: img1
+                            canvas.before:
+
+                                Rotate:
+                                    angle: img1.flip1
+                                    origin: self.center
+
+            MDBottomNavigationItem:
+                name: "WorldZone"
+                text: "World Zone"
+                icon: "map-clock"
+                id: WorldZone
+                on_tab_press: root.ThemeTabs(WorldZone.name)
+
+
+                MDFloatLayout:
+
+                    canvas.before:
+                        Color:
+                            rgba: (255/255, 255/255, 255/255, 1)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                            source: "zone.jpg"
+
+
+                    MDLabel:
+                        pos_hint: {"center_x":0.5, "center_y": 0.8}
+                        size_hint: None, None
+                        size: 600,50
+                        font_size: 50
+                        id: Label
+                        text: "Time in :"
+                        halign: 'center'
+                        color: (1,1,1,1)
+
+                        canvas.before:
+                            Color:
+                                rgb: (2/255,9/255,77/255,1)
+
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [0,0,30,30]
+
+
+                    MDLabel:
+                        pos_hint: {"center_x":0.5, "center_y": 0.6}
+                        size_hint: None, None
+                        size: 700,50
+                        color: (1,1,1,1)
+                        font_size: 50
+                        id: TimeZoneLabel
+                        halign: 'center'
+                        text: ''
+                        canvas.before:
+                            Color:
+                                rgb: (2/255,9/255,77/255,1)
+
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [30,30,0,0]
+
+                    MDFloatLayout:
+                        pos_hint: {"center_x":0.5, "center_y": 0.35}
+                        size_hint: None, None
+                        size: 350,100
+                        canvas.before:
+                            Color:
+                                rgb: (2/255,9/255,77/255,1)
+
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [30,30,0,0]
+                        MDTextField:
+                            hint_text: "Country"
+                            mode: "rectangle"
+
+
+                            pos_hint: {"center_x":0.5, "center_y": 0.5}
+                            size_hint: None, None
+                            size: 200,100
+                            #on_focus: if self.focus: root.OpenMenu()
+                            id: WorldZoneText
+                            fill_color: (2/255,9/255,77/255,0.5)
+                            current_hint_text_color: 1, 1, 1, 1
+                            line_color_focus: 1, 1, 1, 1
+                            line_color_normal: 1, 1, 1, 1
+                            text_color: 1,1,1,1
+
+
+
+
+
+
+
+
+        MDToolbar:
+            id: toolbar
+            pos_hint: {"top":1}
+            title: "Clock System"
+            md_bg_color: (6 / 255, 88 / 255, 97 / 255, 1)
+            specific_text_color: (255/255,255/255,255/255,1)
